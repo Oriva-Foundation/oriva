@@ -5,6 +5,9 @@ import SectionWrapper from '@/components/SectionWrapper';
 import TeamCard from '@/components/TeamCard';
 import Button from '@/components/Button';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/context/LanguageContext';
+import { getTranslation } from '@/lib/translations';
+import type { Language } from '@/context/LanguageContext';
 
 const teamMembers = [
   {
@@ -42,13 +45,21 @@ const teamMembers = [
   },
 ];
 
+const teamValues = [
+  { keyTitle: 'team.collaboration', keyDesc: 'team.workTogether' },
+  { keyTitle: 'team.innovation', keyDesc: 'team.innovationDesc' },
+  { keyTitle: 'team.passionTitle', keyDesc: 'team.deeplyPassionate' },
+];
+
 export default function Team() {
+  const { language } = useLanguage();
+
   return (
     <div>
       {/* Hero Section */}
       <HeroSection
-        title="Meet Our Team"
-        subtitle="Dedicated individuals working together to build impactful digital solutions for the community."
+        title={getTranslation(language as Language, 'team.hero.title')}
+        subtitle={getTranslation(language as Language, 'team.hero.subtitle')}
       />
 
       {/* Team Members Grid */}
@@ -61,10 +72,10 @@ export default function Team() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our Talented Team
+            {getTranslation(language as Language, 'team.talentedTeam')}
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Meet the passionate developers and designers behind Oriva Foundation. Each team member brings unique skills and perspective to our mission.
+            {getTranslation(language as Language, 'team.meetPassionate')}
           </p>
         </motion.div>
 
@@ -85,45 +96,28 @@ export default function Team() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            What Our Team Embodies
+            {getTranslation(language as Language, 'team.whatEmbodies')}
           </h2>
           <p className="text-xl text-gray-600">
-            Core values that drive everything we do
+            {getTranslation(language as Language, 'team.coreValuesGuide')}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              icon: '🤝',
-              title: 'Collaboration',
-              description: 'We work together as one team, combining our strengths to achieve greater impact.',
-            },
-            {
-              icon: '🚀',
-              title: 'Innovation',
-              description: 'We embrace new ideas and modern technologies to solve problems creatively.',
-            },
-            {
-              icon: '❤️',
-              title: 'Passion',
-              description: 'We are deeply passionate about our mission and the communities we serve.',
-            },
-          ].map((value, index) => (
+          {teamValues.map((value, index) => (
             <motion.div
-              key={value.title}
+              key={value.keyTitle}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
               viewport={{ once: true }}
               className="bg-white rounded-xl p-8 text-center border border-gray-200"
             >
-              <div className="text-5xl mb-4">{value.icon}</div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                {value.title}
+                {getTranslation(language as Language, value.keyTitle)}
               </h3>
               <p className="text-gray-600">
-                {value.description}
+                {getTranslation(language as Language, value.keyDesc)}
               </p>
             </motion.div>
           ))}
@@ -140,13 +134,13 @@ export default function Team() {
           className="text-center"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Want to Join Us?
+            {getTranslation(language as Language, 'team.lookingTalented')}
           </h2>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            We're always looking for talented individuals who share our passion for building impactful digital solutions.
+            {getTranslation(language as Language, 'team.alwaysLooking')}
           </p>
           <Button href="/join" variant="primary" size="lg">
-            View Open Positions
+            {getTranslation(language as Language, 'team.viewPositions')}
           </Button>
         </motion.div>
       </SectionWrapper>
