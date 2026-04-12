@@ -1,65 +1,252 @@
-import Image from "next/image";
+'use client';
+
+import HeroSection from '@/components/HeroSection';
+import SectionWrapper from '@/components/SectionWrapper';
+import ProjectCard from '@/components/ProjectCard';
+import SponsorCard from '@/components/SponsorCard';
+import Button from '@/components/Button';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+
+const featuredProjects = [
+  {
+    title: 'Prayer Times App',
+    description: 'A comprehensive Islamic application providing accurate prayer times with Quranic features and community engagement.',
+    tags: ['Islamic', 'Mobile', 'React Native'],
+    link: 'https://github.com',
+  },
+  {
+    title: 'Community Forum',
+    description: 'A safe and inclusive platform for community discussions, knowledge sharing, and collaborative problem-solving.',
+    tags: ['Community', 'Web', 'Next.js'],
+    link: 'https://github.com',
+  },
+  {
+    title: 'Digital Solutions Platform',
+    description: 'An integrated platform delivering innovative digital solutions tailored for social impact and community benefit.',
+    tags: ['Tech', 'Platform', 'AI'],
+    link: 'https://github.com',
+  },
+];
+
+const stats = [
+  { number: '15+', label: 'Projects Built' },
+  { number: '1000+', label: 'People Reached' },
+  { number: '50+', label: 'Contributors' },
+  { number: '24/7', label: 'Community Support' },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div>
+      {/* Hero Section */}
+      <HeroSection
+        title="Building Impactful Digital Solutions"
+        subtitle="Oriva Foundation creates Islamic applications and community-driven projects that make a real difference in people's lives."
+        primaryCTA={{
+          label: 'Explore Projects',
+          href: '/projects',
+        }}
+        secondaryCTA={{
+          label: 'Learn More',
+          href: '/about',
+        }}
+        backgroundVariant="gradient"
+      />
+
+      {/* Featured Projects */}
+      <SectionWrapper id="projects" className="bg-white dark:bg-black">
+        <div className="mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+              Featured Projects
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl">
+              Discover the innovative digital solutions we've built for the community.
+            </p>
+          </motion.div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {featuredProjects.map((project, index) => (
+            <ProjectCard
+              key={project.title}
+              index={index}
+              {...project}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          ))}
         </div>
-      </main>
+        <div className="text-center">
+          <Button href="/projects" variant="primary" size="lg">
+            View All Projects
+          </Button>
+        </div>
+      </SectionWrapper>
+
+      {/* Impact Stats */}
+      <SectionWrapper id="impact" className="bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black">
+        <div className="mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+              Our Impact
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300">
+              Making a tangible difference in the community through technology.
+            </p>
+          </motion.div>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              viewport={{ once: true }}
+              className="bg-white dark:bg-gray-900 rounded-xl p-6 text-center border border-gray-200 dark:border-gray-800"
+            >
+              <div className="text-3xl md:text-4xl font-bold text-red-600 mb-2">
+                {stat.number}
+              </div>
+              <div className="text-gray-600 dark:text-gray-400 font-medium">
+                {stat.label}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* About Preview */}
+      <SectionWrapper id="about" className="bg-white dark:bg-black">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+              About Oriva Foundation
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+              We are a mission-driven non-profit dedicated to creating Islamic applications and community-driven projects that deliver impactful digital solutions for society.
+            </p>
+            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+              Our team comprises talented developers, designers, and community advocates working together to build technology that matters.
+            </p>
+            <Button href="/about" variant="primary" size="lg">
+              Read Our Story
+            </Button>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-br from-red-600 to-red-700 rounded-2xl h-80 shadow-lg flex items-center justify-center"
+          >
+            <div className="text-center text-white">
+              <div className="text-6xl font-bold mb-4">O</div>
+              <p className="text-xl font-semibold">Oriva Foundation</p>
+              <p className="text-red-100 mt-2">Digital Solutions for Community</p>
+            </div>
+          </motion.div>
+        </div>
+      </SectionWrapper>
+
+      {/* Why Choose Us */}
+      <SectionWrapper className="bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black">
+        <div className="mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+              Why Choose Oriva
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300">
+              We combine modern technology with community values
+            </p>
+          </motion.div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            {
+              icon: '🛠️',
+              title: 'Modern Tech Stack',
+              description: 'Built with the latest technologies and best practices to ensure reliability and scalability.',
+            },
+            {
+              icon: '❤️',
+              title: 'Community First',
+              description: 'Our projects are designed with community needs at the heart of every decision.',
+            },
+            {
+              icon: '🌍',
+              title: 'Impactful Solutions',
+              description: 'We create digital solutions that make a real difference in people\'s lives and communities.',
+            },
+          ].map((item, index) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              viewport={{ once: true }}
+              className="bg-white dark:bg-gray-900 rounded-xl p-8 border border-gray-200 dark:border-gray-800 text-center"
+            >
+              <div className="text-4xl mb-4">{item.icon}</div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                {item.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                {item.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* Sponsor Section */}
+      <SectionWrapper className="bg-white dark:bg-black">
+        <SponsorCard />
+      </SectionWrapper>
+
+      {/* CTA Section */}
+      <SectionWrapper className="bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="bg-white dark:bg-gray-900 rounded-2xl p-12 text-center border border-gray-200 dark:border-gray-800"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Ready to Make an Impact?
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+            Join us in building digital solutions that matter. Get in touch with our team today.
+          </p>
+          <Link href="/contact">
+            <Button variant="primary" size="lg">
+              Get In Touch
+            </Button>
+          </Link>
+        </motion.div>
+      </SectionWrapper>
     </div>
   );
 }

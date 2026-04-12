@@ -9,6 +9,7 @@ interface ButtonProps {
   size?: 'sm' | 'md' | 'lg';
   className?: string;
   disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 export default function Button({
@@ -19,6 +20,7 @@ export default function Button({
   size = 'md',
   className = '',
   disabled = false,
+  type = 'button',
 }: ButtonProps) {
   const baseStyles = 'font-medium rounded-lg transition-all duration-200 inline-flex items-center justify-center gap-2 font-sans';
 
@@ -53,6 +55,7 @@ export default function Button({
 
   return (
     <motion.button
+      type={type}
       onClick={onClick}
       disabled={disabled}
       className={buttonClassName}
