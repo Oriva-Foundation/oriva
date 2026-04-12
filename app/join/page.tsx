@@ -12,7 +12,6 @@ export default function Join() {
       <HeroSection
         title="Join Oriva Foundation"
         subtitle="Be part of a mission to create impactful digital solutions for communities around the world."
-        backgroundVariant="minimal"
       />
 
       {/* Why Join */}

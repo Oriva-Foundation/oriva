@@ -1,8 +1,8 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-type Language = 'en' | 'ar';
+export type Language = 'en' | 'ar';
 
 interface LanguageContextType {
   language: Language;
@@ -13,7 +13,15 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
+// Default context value
+const defaultLanguageContext: LanguageContextType = {
+  language: 'en',
+  setLanguage: () => {},
+  isArabic: false,
+  dir: 'ltr',
+};
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>('en');
   const [mounted, setMounted] = useState(false);
 
@@ -21,10 +29,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     setMounted(true);
     // Get saved language from localStorage
     const savedLanguage = localStorage.getItem('language') as Language | null;
-    if (savedLanguage) {
+    if (savedLanguage && savedLanguage !== language) {
       setLanguageState(savedLanguage);
       document.documentElement.lang = savedLanguage;
       document.documentElement.dir = savedLanguage === 'ar' ? 'rtl' : 'ltr';
+    } else {
+      document.documentElement.lang = 'en';
+      document.documentElement.dir = 'ltr';
     }
   }, []);
 
@@ -34,10 +45,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
   };
-
-  if (!mounted) {
-    return <>{children}</>;
-  }
 
   return (
     <LanguageContext.Provider
@@ -53,10 +60,14 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function useLanguage() {
+export function useLanguage(): LanguageContextType {
   const context = useContext(LanguageContext);
-  if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
+  
+  if (!context) {
+    // Return default context instead of throwing error
+    // This allows the hook to work during SSR
+    return defaultLanguageContext;
   }
+  
   return context;
 }

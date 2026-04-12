@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import HeroSection from '@/components/HeroSection';
 import SectionWrapper from '@/components/SectionWrapper';
@@ -39,10 +39,9 @@ const stats = [
 export default function Home() {
   return (
     <div>
-      {/* Hero Section */}
       <HeroSection
         title="Building Impactful Digital Solutions"
-        subtitle="Oriva Foundation creates Islamic applications and community-driven projects that make a real difference in people's lives."
+        subtitle="Oriva Foundation creates Islamic applications and community-driven projects that make a real difference."
         primaryCTA={{
           label: 'Explore Projects',
           href: '/projects',
@@ -51,10 +50,8 @@ export default function Home() {
           label: 'Learn More',
           href: '/about',
         }}
-        backgroundVariant="gradient"
       />
 
-      {/* Featured Projects */}
       <SectionWrapper id="projects" className="bg-white">
         <div className="mb-12">
           <motion.div
@@ -67,17 +64,13 @@ export default function Home() {
               Featured Projects
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl">
-              Discover the innovative digital solutions we've built for the community.
+              Discover the innovative digital solutions we have built for the community.
             </p>
           </motion.div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {featuredProjects.map((project, index) => (
-            <ProjectCard
-              key={project.title}
-              index={index}
-              {...project}
-            />
+            <ProjectCard key={project.title} index={index} {...project} />
           ))}
         </div>
         <div className="text-center">
@@ -87,7 +80,6 @@ export default function Home() {
         </div>
       </SectionWrapper>
 
-      {/* Impact Stats */}
       <SectionWrapper id="impact" className="bg-gradient-to-b from-gray-50 to-white">
         <div className="mb-12">
           <motion.div
@@ -118,15 +110,12 @@ export default function Home() {
               <div className="text-3xl md:text-4xl font-bold text-red-600 mb-2">
                 {stat.number}
               </div>
-              <div className="text-gray-600 font-medium">
-                {stat.label}
-              </div>
+              <div className="text-gray-600 font-medium">{stat.label}</div>
             </motion.div>
           ))}
         </div>
       </SectionWrapper>
 
-      {/* About Preview */}
       <SectionWrapper id="about" className="bg-white">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -139,10 +128,10 @@ export default function Home() {
               About Oriva Foundation
             </h2>
             <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-              We are a mission-driven non-profit dedicated to creating Islamic applications and community-driven projects that deliver impactful digital solutions for society.
+              Passionate about building impactful Islamic applications and community-driven projects.
             </p>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Our team comprises talented developers, designers, and community advocates working together to build technology that matters.
+              Our team comprises talented developers, designers, and community advocates.
             </p>
             <Button href="/about" variant="primary" size="lg">
               Read Our Story
@@ -164,7 +153,6 @@ export default function Home() {
         </div>
       </SectionWrapper>
 
-      {/* Why Choose Us */}
       <SectionWrapper className="bg-gradient-to-b from-gray-50 to-white">
         <div className="mb-12">
           <motion.div
@@ -185,19 +173,19 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
             {
-              icon: '🛠️',
+              icon: '⚙️',
               title: 'Modern Tech Stack',
-              description: 'Built with the latest technologies and best practices to ensure reliability and scalability.',
+              description: 'Built with latest technologies and best practices for reliability.',
             },
             {
               icon: '❤️',
               title: 'Community First',
-              description: 'Our projects are designed with community needs at the heart of every decision.',
+              description: 'Our projects are designed with community needs at heart.',
             },
             {
               icon: '🌍',
               title: 'Impactful Solutions',
-              description: 'We create digital solutions that make a real difference in people\'s lives and communities.',
+              description: 'We create digital solutions that make a real difference.',
             },
           ].map((item, index) => (
             <motion.div
@@ -209,23 +197,17 @@ export default function Home() {
               className="bg-white rounded-xl p-8 border border-gray-200 text-center"
             >
               <div className="text-4xl mb-4">{item.icon}</div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                {item.title}
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                {item.description}
-              </p>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">{item.title}</h3>
+              <p className="text-gray-600 leading-relaxed">{item.description}</p>
             </motion.div>
           ))}
         </div>
       </SectionWrapper>
 
-      {/* Sponsor Section */}
       <SectionWrapper className="bg-white">
         <SponsorCard />
       </SectionWrapper>
 
-      {/* CTA Section */}
       <SectionWrapper className="bg-gradient-to-b from-gray-50 to-white">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -250,4 +232,3 @@ export default function Home() {
     </div>
   );
 }
-

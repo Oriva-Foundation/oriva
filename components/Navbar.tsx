@@ -4,19 +4,23 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/context/LanguageContext';
+import { getTranslation } from '@/lib/translations';
+import type { Language } from '@/context/LanguageContext';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { language, setLanguage } = useLanguage();
 
   const navItems = [
-    { label: 'Home', href: '/' },
-    { label: 'About', href: '/about' },
-    { label: 'Projects', href: '/projects' },
-    { label: 'Team', href: '/team' },
-    { label: 'Impact', href: '/impact' },
-    { label: 'Join Us', href: '/join' },
-    { label: 'Support', href: '/support' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'nav.home', href: '/' },
+    { label: 'nav.about', href: '/about' },
+    { label: 'nav.projects', href: '/projects' },
+    { label: 'nav.team', href: '/team' },
+    { label: 'nav.impact', href: '/impact' },
+    { label: 'nav.joinUs', href: '/join' },
+    { label: 'nav.support', href: '/support' },
+    { label: 'nav.contact', href: '/contact' },
   ];
 
   return (
@@ -53,20 +57,41 @@ export default function Navbar() {
                 href={item.href}
                 className="text-gray-700 hover:text-red-600 transition-colors font-medium text-sm"
               >
-                {item.label}
+                {getTranslation(language as Language, item.label)}
               </Link>
             ))}
+            
+            {/* Language Toggle */}
+            <button
+              onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
+              className="ml-4 px-3 py-1.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors font-medium text-sm border border-red-200"
+            >
+              {language === 'en' ? 'العربية' : 'English'}
+            </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden flex flex-col gap-1.5 w-6 h-6"
-          >
-            <div className="w-full h-0.5 bg-gray-800 rounded transition-all" />
-            <div className="w-full h-0.5 bg-gray-800 rounded transition-all" />
-            <div className="w-full h-0.5 bg-gray-800 rounded transition-all" />
-          </button>
+          {/* Mobile Menu Button & Language Toggle */}
+          <div className="lg:hidden flex items-center gap-2">
+            {/* Mobile Language Toggle */}
+            <button
+              onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
+              className="px-2 py-1 rounded text-xs bg-red-50 text-red-600 hover:bg-red-100 transition-colors font-medium border border-red-200"
+            >
+              {language === 'en' ? 'عربي' : 'EN'}
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="flex flex-col gap-1.5 w-6 h-6"
+              aria-label="Toggle mobile menu"
+              title="Toggle mobile menu"
+            >
+              <div className="w-full h-0.5 bg-gray-800 rounded transition-all" />
+              <div className="w-full h-0.5 bg-gray-800 rounded transition-all" />
+              <div className="w-full h-0.5 bg-gray-800 rounded transition-all" />
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
@@ -84,7 +109,7 @@ export default function Navbar() {
                 className="block py-2 text-gray-700 hover:text-red-600 transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                {item.label}
+                {getTranslation(language as Language, item.label)}
               </Link>
             ))}
           </motion.div>

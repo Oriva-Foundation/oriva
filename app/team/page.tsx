@@ -49,7 +49,6 @@ export default function Team() {
       <HeroSection
         title="Meet Our Team"
         subtitle="Dedicated individuals working together to build impactful digital solutions for the community."
-        backgroundVariant="minimal"
       />
 
       {/* Team Members Grid */}

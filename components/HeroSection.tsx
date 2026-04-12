@@ -15,7 +15,7 @@ interface HeroSectionProps {
     label: string;
     href: string;
   };
-  backgroundVariant?: 'default' | 'minimal' | 'gradient';
+
 }
 
 export default function HeroSection({
@@ -23,7 +23,6 @@ export default function HeroSection({
   subtitle,
   primaryCTA,
   secondaryCTA,
-  backgroundVariant = 'default',
 }: HeroSectionProps) {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -43,12 +42,6 @@ export default function HeroSection({
       y: 0,
       transition: { duration: 0.8, ease: 'easeOut' },
     },
-  };
-
-  const backgroundClass = {
-    default: 'bg-gradient-to-b from-white via-red-50/30 to-white',
-    minimal: 'bg-white',
-    gradient: 'bg-gradient-to-br from-red-50 via-white to-gray-50',
   };
 
   return (

@@ -88,7 +88,6 @@ export default function Support() {
       <HeroSection
         title="Support Oriva Foundation"
         subtitle="Help us create impactful digital solutions for communities around the world."
-        backgroundVariant="minimal"
       />
 
       {/* Main Sponsor Card */}

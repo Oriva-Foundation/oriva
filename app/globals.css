@@ -9,22 +9,7 @@
   --gray-border: #e0e0e0;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-red: {
-    50: #fef2f2;
-    100: #fee2e2;
-    500: #ef4444;
-    600: #dc2626;
-    700: #b91c1c;
-  };
-}
-
 * {
-  scrollbar-width: thin;
   scrollbar-color: var(--red-primary) var(--gray-light);
 }
 

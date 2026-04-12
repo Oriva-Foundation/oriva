@@ -1,8 +1,14 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
+import { getTranslation } from '@/lib/translations';
+import type { Language } from '@/context/LanguageContext';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const { language } = useLanguage();
 
   return (
     <footer className="bg-gray-900 text-white mt-20 border-t">
@@ -12,32 +18,32 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4 text-red-500">Oriva Foundation</h3>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Building impactful digital solutions for the community through Islamic applications and community-driven projects.
+              {getTranslation(language as Language, 'about.passionateBuilding')}
             </p>
           </div>
 
           {/* Links */}
           <div>
-            <h4 className="font-semibold mb-4">Pages</h4>
+            <h4 className="font-semibold mb-4">{getTranslation(language as Language, 'nav.projects')}</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
                 <Link href="/about" className="hover:text-red-500 transition-colors">
-                  About
+                  {getTranslation(language as Language, 'nav.about')}
                 </Link>
               </li>
               <li>
                 <Link href="/projects" className="hover:text-red-500 transition-colors">
-                  Projects
+                  {getTranslation(language as Language, 'nav.projects')}
                 </Link>
               </li>
               <li>
                 <Link href="/team" className="hover:text-red-500 transition-colors">
-                  Team
+                  {getTranslation(language as Language, 'nav.team')}
                 </Link>
               </li>
               <li>
                 <Link href="/impact" className="hover:text-red-500 transition-colors">
-                  Impact
+                  {getTranslation(language as Language, 'nav.impact')}
                 </Link>
               </li>
             </ul>
@@ -45,7 +51,7 @@ export default function Footer() {
 
           {/* Social */}
           <div>
-            <h4 className="font-semibold mb-4">Follow Us</h4>
+            <h4 className="font-semibold mb-4">{getTranslation(language as Language, 'support.followUs')}</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
                 <a
@@ -82,7 +88,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-semibold mb-4">Contact</h4>
+            <h4 className="font-semibold mb-4">{getTranslation(language as Language, 'contact.hero.title')}</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
                 <a href="mailto:hello@oriva.org" className="hover:text-red-500 transition-colors">
@@ -91,7 +97,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/contact" className="hover:text-red-500 transition-colors">
-                  Contact Form
+                  {getTranslation(language as Language, 'contact.hero.title')}
                 </Link>
               </li>
             </ul>
@@ -102,14 +108,14 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm">
-              &copy; {currentYear} Oriva Foundation. All rights reserved.
+              &copy; {currentYear} {getTranslation(language as Language, 'common.copyright')}
             </p>
             <div className="flex gap-6 text-sm text-gray-400">
               <Link href="/privacy" className="hover:text-red-500 transition-colors">
-                Privacy Policy
+                {getTranslation(language as Language, 'common.privacy')}
               </Link>
               <Link href="/terms" className="hover:text-red-500 transition-colors">
-                Terms of Service
+                {getTranslation(language as Language, 'common.termsOfService')}
               </Link>
             </div>
           </div>

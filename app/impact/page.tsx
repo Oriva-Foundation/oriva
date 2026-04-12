@@ -62,7 +62,6 @@ export default function Impact() {
       <HeroSection
         title="Our Impact"
         subtitle="Real metrics showing how technology is making a difference in communities around the world."
-        backgroundVariant="minimal"
       />
 
       {/* Impact Stats */}

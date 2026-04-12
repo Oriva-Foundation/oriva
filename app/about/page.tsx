@@ -12,7 +12,6 @@ export default function About() {
       <HeroSection
         title="About Oriva Foundation"
         subtitle="We're building the future through innovative digital solutions rooted in community values and Islamic principles."
-        backgroundVariant="minimal"
       />
 
       {/* Mission & Vision */}

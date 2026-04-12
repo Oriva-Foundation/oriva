@@ -2,6 +2,9 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub, faLinkedin, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 
 interface TeamCardProps {
   name: string;
@@ -70,7 +73,7 @@ export default function TeamCard({
             whileTap={{ scale: 0.95 }}
             title={`GitHub: @${github}`}
           >
-            <span className="text-lg">🐙</span>
+            <FontAwesomeIcon icon={faGithub} className="text-lg" />
           </motion.a>
         )}
         {linkedin && (
@@ -83,7 +86,7 @@ export default function TeamCard({
             whileTap={{ scale: 0.95 }}
             title="LinkedIn"
           >
-            <span className="text-lg">💼</span>
+            <FontAwesomeIcon icon={faLinkedin} className="text-lg" />
           </motion.a>
         )}
         {whatsapp && (
@@ -96,7 +99,7 @@ export default function TeamCard({
             whileTap={{ scale: 0.95 }}
             title="WhatsApp"
           >
-            <span className="text-lg">💬</span>
+            <FontAwesomeIcon icon={faWhatsapp} className="text-lg" />
           </motion.a>
         )}
         {portfolio && (
@@ -109,7 +112,7 @@ export default function TeamCard({
             whileTap={{ scale: 0.95 }}
             title="Portfolio"
           >
-            <span className="text-lg">🌐</span>
+            <FontAwesomeIcon icon={faGlobe} className="text-lg" />
           </motion.a>
         )}
       </div>

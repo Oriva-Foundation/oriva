@@ -69,7 +69,6 @@ export default function Contact() {
       <HeroSection
         title="Get In Touch"
         subtitle="Have questions, want to contribute, or interested in partnering with us? We'd love to hear from you."
-        backgroundVariant="minimal"
       />
 
       {/* Contact Methods */}

@@ -63,7 +63,6 @@ export default function Projects() {
       <HeroSection
         title="Our Projects"
         subtitle="Explore the innovative digital solutions we've built to create impact in communities."
-        backgroundVariant="minimal"
       />
 
       {/* Projects Grid */}
