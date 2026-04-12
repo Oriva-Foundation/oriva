@@ -4,7 +4,7 @@ A modern, professional portfolio website for Oriva Foundation - a non-profit org
 
 ## 🌍 Live Demo
 
-[Visit Oriva Foundation](https://oriva.org)
+[Visit Oriva Foundation](https://oriva-nine.vercel.app/)
 
 ## 📋 Overview
 
