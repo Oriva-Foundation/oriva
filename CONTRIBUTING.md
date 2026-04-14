@@ -193,8 +193,8 @@ Contributors will be recognized:
 ## Questions?
 
 Feel free to reach out:
-- **Email**: hello@oriva.org
+- **Email**: orivafoundation@gmail.com
 - **GitHub Discussions**: [Discussion Forum](https://github.com/Oriva-Foundation/oriva/discussions)
 - **Create an Issue**: [New Issue](https://github.com/Oriva-Foundation/oriva/issues)
 
-Thank you for your interest in contributing to Oriva Foundation! 🚀
+Thank you for your interest in contributing to Oriva Foundation!

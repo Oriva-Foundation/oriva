@@ -5,10 +5,12 @@ import SectionWrapper from '@/components/SectionWrapper';
 import SponsorCard from '@/components/SponsorCard';
 import Button from '@/components/Button';
 import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDollarSign, faLaptop, faBullhorn, faHandshake, faWrench, faUsers, faGlobe } from '@fortawesome/free-solid-svg-icons';
 
 const supportWays = [
   {
-    icon: '💰',
+    icon: faDollarSign,
     title: 'Financial Support',
     description: 'Contribute financially to support our projects and community initiatives.',
     links: [
@@ -17,7 +19,7 @@ const supportWays = [
     ],
   },
   {
-    icon: '💻',
+    icon: faLaptop,
     title: 'Contribution',
     description: 'Contribute your skills as a developer, designer, or community advocate.',
     links: [
@@ -26,7 +28,7 @@ const supportWays = [
     ],
   },
   {
-    icon: '📢',
+    icon: faBullhorn,
     title: 'Advocacy',
     description: 'Help spread the word about Oriva Foundation and our mission.',
     links: [
@@ -35,7 +37,7 @@ const supportWays = [
     ],
   },
   {
-    icon: '🤝',
+    icon: faHandshake,
     title: 'Partnership',
     description: 'Partner with us to create impact at scale and reach more communities.',
     links: [
@@ -122,7 +124,9 @@ export default function Support() {
               viewport={{ once: true }}
               className="bg-white rounded-xl p-8 border border-gray-200"
             >
-              <div className="text-5xl mb-4">{way.icon}</div>
+              <div className="text-5xl mb-4 text-red-600">
+                <FontAwesomeIcon icon={way.icon} />
+              </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-3">
                 {way.title}
               </h3>
@@ -223,17 +227,17 @@ export default function Support() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                icon: '🔧',
+                icon: faWrench,
                 title: 'Better Tools',
                 description: 'Helps us build and maintain high-quality applications and infrastructure.',
               },
               {
-                icon: '👥',
+                icon: faUsers,
                 title: 'Growing Team',
                 description: 'Enables us to hire and support talented developers and designers.',
               },
               {
-                icon: '🌍',
+                icon: faGlobe,
                 title: 'Wider Reach',
                 description: 'Allows us to reach more communities and scale our impact.',
               },
@@ -246,7 +250,9 @@ export default function Support() {
                 viewport={{ once: true }}
                 className="bg-white rounded-xl p-8 text-center border border-gray-200"
               >
-                <div className="text-5xl mb-4">{item.icon}</div>
+                <div className="text-5xl mb-4 text-red-600">
+                  <FontAwesomeIcon icon={item.icon} />
+                </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">
                   {item.title}
                 </h3>

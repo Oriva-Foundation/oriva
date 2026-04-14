@@ -36,7 +36,7 @@ This Code of Conduct applies within all community spaces, and also applies when 
 
 ## Reporting a Violation
 
-If you witness or experience a violation of this Code of Conduct, please report it by emailing hello@oriva.org with the following information:
+If you witness or experience a violation of this Code of Conduct, please report it by emailing orivafoundation@gmail.com with the following information:
 
 * Your name and contact information
 * Description of the incident
@@ -60,4 +60,4 @@ This Code of Conduct is adapted from the Contributor Covenant, version 2.1, avai
 
 ## Questions?
 
-If you have questions about this Code of Conduct, please contact us at hello@oriva.org
+If you have questions about this Code of Conduct, please contact us at orivafoundation@gmail.com

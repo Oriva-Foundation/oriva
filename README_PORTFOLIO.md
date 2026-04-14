@@ -166,7 +166,7 @@ Adjust timing and effects in component files using Framer Motion's `motion` comp
 
 - **GitHub**: [soghayarmahmoud](https://github.com/soghayarmahmoud)
 - **GitHub Sponsors**: [Sponsor](https://github.com/sponsors/soghayarmahmoud)
-- **Email**: hello@oriva.org
+- **Email**: orivafoundation@gmail.com
 
 ## 📜 License
 

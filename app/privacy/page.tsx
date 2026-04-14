@@ -99,7 +99,7 @@ export default function Privacy() {
                 Contact Us
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                If you have any questions about this Privacy Policy, please contact us at hello@oriva.org
+                If you have any questions about this Privacy Policy, please contact us at orivafoundation@gmail.com
               </p>
             </section>
           </motion.div>

@@ -5,6 +5,9 @@ import SectionWrapper from '@/components/SectionWrapper';
 import Button from '@/components/Button';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faGithub, faBriefcase, faTwitter } from '@fortawesome/free-solid-svg-icons';
+import { faTwitter as faTwitterBrand } from '@fortawesome/free-brands-svg-icons';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -38,25 +41,25 @@ export default function Contact() {
 
   const contactOptions = [
     {
-      icon: '📧',
+      icon: faEnvelope,
       title: 'Email',
-      value: 'hello@oriva.org',
-      link: 'mailto:hello@oriva.org',
+      value: 'orivafoundation@gmail.com',
+      link: 'mailto:orivafoundation@gmail.com',
     },
     {
-      icon: '🐙',
+      icon: faGithub,
       title: 'GitHub',
       value: '@soghayarmahmoud',
       link: 'https://github.com/soghayarmahmoud',
     },
     {
-      icon: '💼',
+      icon: faBriefcase,
       title: 'LinkedIn',
       value: 'Oriva Foundation',
       link: 'https://linkedin.com',
     },
     {
-      icon: '🐦',
+      icon: faTwitterBrand,
       title: 'Twitter',
       value: '@oriva_foundation',
       link: 'https://twitter.com',
@@ -101,7 +104,9 @@ export default function Contact() {
               viewport={{ once: true }}
               className="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-6 text-center border border-red-200 hover:shadow-lg transition-all"
             >
-              <div className="text-4xl mb-3">{option.icon}</div>
+              <div className="text-4xl mb-3 text-red-600">
+                <FontAwesomeIcon icon={option.icon} />
+              </div>
               <h3 className="text-lg font-bold text-gray-900 mb-1">
                 {option.title}
               </h3>
