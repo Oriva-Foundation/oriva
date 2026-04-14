@@ -117,7 +117,7 @@ export default function Terms() {
                 9. Contact Information
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                If you have any questions about these Terms of Service, please contact us at hello@oriva.org
+                If you have any questions about these Terms of Service, please contact us at orivafoundation@gmail.com
               </p>
             </section>
           </motion.div>

@@ -4,6 +4,9 @@ import HeroSection from '@/components/HeroSection';
 import SectionWrapper from '@/components/SectionWrapper';
 import Button from '@/components/Button';
 import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGlobe, faRocket, faLightbulb, faHandshake, faBook, faTarget, faBriefcase, faComment, faGithub } from '@fortawesome/free-solid-svg-icons';
+import { faGithub as faGithubBrand } from '@fortawesome/free-brands-svg-icons';
 
 export default function Join() {
   return (
@@ -34,32 +37,32 @@ export default function Join() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
             {
-              icon: '🌍',
+              icon: faGlobe,
               title: 'Make Global Impact',
               description: 'Your work will directly impact communities around the world through our Islamic applications and digital solutions.',
             },
             {
-              icon: '🚀',
+              icon: faRocket,
               title: 'Grow Your Skills',
               description: 'Work with cutting-edge technologies and learn from talented developers and designers in a collaborative environment.',
             },
             {
-              icon: '💡',
+              icon: faLightbulb,
               title: 'Meaningful Work',
               description: 'Every project we build is designed to serve communities and make a real difference in people\'s lives.',
             },
             {
-              icon: '🤝',
+              icon: faHandshake,
               title: 'Supportive Community',
               description: 'Join a vibrant community of passionate individuals who share your values and vision for positive change.',
             },
             {
-              icon: '📚',
+              icon: faBook,
               title: 'Continuous Learning',
               description: 'We invest in our team members through mentorship, training, and opportunities to expand your knowledge.',
             },
             {
-              icon: '🎯',
+              icon: faTarget,
               title: 'Clear Mission',
               description: 'Work towards a clear, meaningful mission: building Islamic applications and community-driven projects.',
             },
@@ -72,7 +75,9 @@ export default function Join() {
               viewport={{ once: true }}
               className="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-8 border border-red-200"
             >
-              <div className="text-5xl mb-4">{item.icon}</div>
+              <div className="text-5xl mb-4 text-red-600">
+                <FontAwesomeIcon icon={item.icon} />
+              </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-3">
                 {item.title}
               </h3>
@@ -254,7 +259,7 @@ export default function Join() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-semibold"
               >
-                💬 WhatsApp: +201019593092
+                <FontAwesomeIcon icon={faComment} /> WhatsApp: +201019593092
               </a>
               <a
                 href="https://www.linkedin.com/in/elsoghayar/"
@@ -262,7 +267,7 @@ export default function Join() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-semibold"
               >
-                💼 LinkedIn Profile
+                <FontAwesomeIcon icon={faBriefcase} /> LinkedIn Profile
               </a>
               <a
                 href="https://github.com/soghayarmahmoud"
@@ -270,7 +275,7 @@ export default function Join() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-semibold"
               >
-                🐙 GitHub
+                <FontAwesomeIcon icon={faGithubBrand} /> GitHub
               </a>
             </div>
           </div>

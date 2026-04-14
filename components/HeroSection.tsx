@@ -87,8 +87,12 @@ export default function HeroSection({
           variants={itemVariants}
           className="mb-6 flex justify-center"
         >
-          <div className="bg-red-600 text-white w-16 h-16 rounded-2xl flex items-center justify-center text-3xl font-bold shadow-lg">
-            O
+          <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg border-4 border-red-600 flex items-center justify-center bg-white">
+            <img 
+              src="/imgs/oriva.png" 
+              alt="Oriva Logo" 
+              className="w-20 h-20 object-contain"
+            />
           </div>
         </motion.div>
 

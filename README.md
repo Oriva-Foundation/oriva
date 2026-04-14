@@ -2,20 +2,20 @@
 
 A modern, professional portfolio website for Oriva Foundation - a non-profit organization focused on building Islamic applications and community-driven projects that deliver impactful digital solutions for society.
 
-## 🌍 Live Demo
+## Live Demo
 
 [Visit Oriva Foundation](https://oriva-nine.vercel.app/)
 
 ## 📋 Overview
 
 Oriva Foundation is dedicated to:
-- 🕌 Building Islamic applications
-- 👥 Creating community-driven projects
-- 💡 Delivering impactful digital solutions for society
+- Building Islamic applications
+- Creating community-driven projects
+- Delivering impactful digital solutions for society
 
 This website showcases our mission, projects, impact, team, and provides ways for community members to get involved and support our work.
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js 18.0 or higher
@@ -86,7 +86,7 @@ oriva/
 └── LICENSE                         # MIT License
 ```
 
-## 🎨 Design System
+## Design System
 
 ### Color Palette
 - **Primary**: Red (#C62828)
@@ -115,7 +115,7 @@ oriva/
 | Privacy | `/privacy` | Privacy policy |
 | Terms | `/terms` | Terms of service |
 
-## 🔧 Technologies Used
+## Technologies Used
 
 | Technology | Version | Purpose |
 |-----------|---------|---------|
@@ -125,7 +125,7 @@ oriva/
 | Tailwind CSS | ^4 | Utility-first CSS |
 | Framer Motion | ^11.0.0 | Animations |
 
-## ✨ Features
+## Features
 
 - ✅ **Fully Responsive**: Mobile, tablet, and desktop support
 - ✅ **Light Mode**: Clean, bright aesthetic
@@ -145,7 +145,7 @@ npm start        # Start production server
 npm run lint     # Run ESLint
 ```
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
@@ -155,7 +155,7 @@ We are committed to providing a welcoming and inclusive environment. Please see 
 
 ## 📞 Contact
 
-- **Email**: hello@oriva.org
+- **Email**: orivafoundation@gmail.com
 - **GitHub**: [@Oriva-Foundation](https://github.com/Oriva-Foundation)
 - **Sponsor**: [GitHub Sponsors](https://github.com/sponsors/soghayarmahmoud)
 

@@ -65,22 +65,32 @@ export default function Footer() {
               </li>
               <li>
                 <a
+                  href="https://www.facebook.com/profile.php?id=61570850696332"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-red-500 transition-colors"
+                >
+                  Facebook
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.youtube.com/@Oriva4u"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-red-500 transition-colors"
+                >
+                  YouTube
+                </a>
+              </li>
+              <li>
+                <a
                   href="https://linkedin.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-red-500 transition-colors"
                 >
                   LinkedIn
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-red-500 transition-colors"
-                >
-                  Twitter
                 </a>
               </li>
             </ul>
@@ -91,8 +101,8 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">{getTranslation(language as Language, 'contact.hero.title')}</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <a href="mailto:hello@oriva.org" className="hover:text-red-500 transition-colors">
-                  hello@oriva.org
+                <a href="mailto:orivafoundation@gmail.com" className="hover:text-red-500 transition-colors">
+                  orivafoundation@gmail.com
                 </a>
               </li>
               <li>
