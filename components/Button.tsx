@@ -10,6 +10,8 @@ interface ButtonProps {
   className?: string;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
+  target?: string;
+  rel?: string;
 }
 
 export default function Button({
@@ -21,6 +23,8 @@ export default function Button({
   className = '',
   disabled = false,
   type = 'button',
+  target,
+  rel,
 }: ButtonProps) {
   const baseStyles = 'font-medium rounded-lg transition-all duration-200 inline-flex items-center justify-center gap-2 font-sans';
 
@@ -44,6 +48,8 @@ export default function Button({
     return (
       <motion.a
         href={href}
+        target={target}
+        rel={rel}
         className={buttonClassName}
         whileHover={!disabled ? { scale: 1.05 } : {}}
         whileTap={!disabled ? { scale: 0.95 } : {}}

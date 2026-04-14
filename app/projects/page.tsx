@@ -6,47 +6,112 @@ import ProjectCard from '@/components/ProjectCard';
 import Button from '@/components/Button';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/lib/translations';
 
-const projects = [
-  {
-    title: 'Prayer Times App',
-    description: 'A comprehensive Islamic application providing accurate prayer times across locations, Quranic features, and community engagement tools.',
-    tags: ['Islamic', 'Mobile', 'React Native'],
-    link: 'https://github.com',
-  },
-  {
-    title: 'Community Forum',
-    description: 'A safe and inclusive platform for community discussions, knowledge sharing, and collaborative problem-solving.',
-    tags: ['Community', 'Web', 'Next.js'],
-    link: 'https://github.com',
-  },
-  {
-    title: 'Quran Learning Platform',
-    description: 'An interactive platform for learning Quranic content with modern pedagogical approaches and accessible design.',
-    tags: ['Islamic', 'Education', 'AI'],
-    link: 'https://github.com',
-  },
-  {
-    title: 'Community Volunteer Hub',
-    description: 'Connect community members with volunteering opportunities and track social impact initiatives.',
-    tags: ['Community', 'Web', 'Impact'],
-    link: 'https://github.com',
-  },
-  {
-    title: 'Islamic Events Calendar',
-    description: 'A centralized calendar for Islamic events, holidays, and community gatherings with notifications and sharing features.',
-    tags: ['Islamic', 'Calendar', 'Web'],
-    link: 'https://github.com',
-  },
-  {
-    title: 'Community Analytics Dashboard',
-    description: 'Real-time insights and analytics for tracking community health, growth metrics, and engagement patterns.',
-    tags: ['Analytics', 'Tech', 'Platform'],
-    link: 'https://github.com',
-  },
-];
+const projectsData = {
+  en: [
+    {
+      title: 'Prayer Times App',
+      description: 'A comprehensive Islamic application providing accurate prayer times across locations, Quranic features, and community engagement tools.',
+      tags: ['Islamic', 'Mobile', 'React Native'],
+      link: 'https://github.com',
+    },
+    {
+      title: 'Community Forum',
+      description: 'A safe and inclusive platform for community discussions, knowledge sharing, and collaborative problem-solving.',
+      tags: ['Community', 'Web', 'Next.js'],
+      link: 'https://github.com',
+    },
+    {
+      title: 'ProCode Academy - E-Learning LMS Platform',
+      description: 'A comprehensive e-learning platform designed to make quality education accessible to everyone. Features interactive courses, live classes, and a supportive learning community.',
+      tags: ['Education', 'Platform', 'Featured'],
+      link: 'https://github.com/soghayarmahmoud/procode-edu-pulse-lms',
+      images: [
+        '/imgs/procode/1.PNG',
+        '/imgs/procode/2.PNG',
+        '/imgs/procode/3.PNG',
+      ],
+    },
+    {
+      title: 'Al-Buckary App',
+      description: 'A modern Islamic application connecting believers with authentic Islamic content, including authentic hadith collections and community resources.',
+      tags: ['Islamic', 'Mobile', 'Featured'],
+      link: 'https://github.com/soghayarmahmoud/Al-Buckary',
+      images: [
+        '/imgs/buckary/1.jpg',
+        '/imgs/buckary/2.jpg',
+        '/imgs/buckary/3.jpg',
+      ],
+    },
+    {
+      title: 'Quran Learning Platform',
+      description: 'An interactive platform for learning Quranic content with modern pedagogical approaches and accessible design.',
+      tags: ['Islamic', 'Education', 'AI'],
+      link: 'https://github.com',
+    },
+    {
+      title: 'Community Volunteer Hub',
+      description: 'Connect community members with volunteering opportunities and track social impact initiatives.',
+      tags: ['Community', 'Web', 'Impact'],
+      link: 'https://github.com',
+    },
+  ],
+  ar: [
+    {
+      title: 'تطبيق أوقات الصلاة',
+      description: 'تطبيق إسلامي شامل يوفر أوقات صلاة دقيقة عبر المواقع المختلفة، بميزات قرآنية وأدوات التفاعل المجتمعي.',
+      tags: ['إسلامي', 'موبايل', 'React Native'],
+      link: 'https://github.com',
+    },
+    {
+      title: 'منتدى المجتمع',
+      description: 'منصة آمنة وشاملة للنقاشات المجتمعية ومشاركة المعرفة والحل التعاوني للمشاكل.',
+      tags: ['مجتمع', 'ويب', 'Next.js'],
+      link: 'https://github.com',
+    },
+    {
+      title: 'أكاديمية بروكود - منصة التعليم الإلكتروني',
+      description: 'منصة تعليمية شاملة مصممة لجعل التعليم الجودة متاحاً للجميع. تتضمن دورات تفاعلية وفصول حية ومجتمع تعليمي داعم.',
+      tags: ['تعليم', 'منصة', 'مميز'],
+      link: 'https://github.com/soghayarmahmoud/procode-edu-pulse-lms',
+      images: [
+        '/imgs/procode/1.PNG',
+        '/imgs/procode/2.PNG',
+        '/imgs/procode/3.PNG',
+      ],
+    },
+    {
+      title: 'تطبيق البخاري',
+      description: 'تطبيق إسلامي حديث يربط المؤمنين بمحتوى إسلامي أصيل، بما في ذلك مجموعات الأحاديث الأصيلة وموارد المجتمع.',
+      tags: ['إسلامي', 'موبايل', 'مميز'],
+      link: 'https://github.com/soghayarmahmoud/Al-Buckary',
+      images: [
+        '/imgs/buckary/1.jpg',
+        '/imgs/buckary/2.jpg',
+        '/imgs/buckary/3.jpg',
+      ],
+    },
+    {
+      title: 'منصة تعلم القرآن',
+      description: 'منصة تفاعلية لتعلم محتوى القرآني مع أساليب تعليمية حديثة وتصميم سهل الوصول.',
+      tags: ['إسلامي', 'تعليم', 'الذكاء الاصطناعي'],
+      link: 'https://github.com',
+    },
+    {
+      title: 'مركز التطوع المجتمعي',
+      description: 'ربط أعضاء المجتمع بفرص التطوع وتتبع المبادرات ذات التأثير الاجتماعي.',
+      tags: ['مجتمع', 'ويب', 'تأثير'],
+      link: 'https://github.com',
+    },
+  ],
+};
 
 export default function Projects() {
+  const { language } = useLanguage();
+  const t = translations[language];
+  const projects = projectsData[language];
   const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
 
   const allTags = Array.from(
@@ -61,11 +126,87 @@ export default function Projects() {
     <div>
       {/* Hero Section */}
       <HeroSection
-        title="Our Projects"
-        subtitle="Explore the innovative digital solutions we've built to create impact in communities."
+        title={t.projects.hero.title}
+        subtitle={t.projects.hero.subtitle}
       />
 
-      {/* Projects Grid */}
+      {/* Featured Projects Section */}
+      <SectionWrapper className="bg-gray-50">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Featured Projects
+          </h2>
+          <p className="text-xl text-gray-600 mb-12">
+            Our flagship projects making impact
+          </p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {projects
+              .filter((p) => p.tags.includes('Featured'))
+              .map((project, index) => (
+                <motion.div
+                  key={project.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"
+                >
+                  {/* Image Gallery */}
+                  {project.images && (
+                    <div className="relative w-full h-64 bg-gradient-to-br from-red-100 to-red-50 overflow-auto">
+                      <div className="flex gap-2 p-4">
+                        {project.images.map((img, idx) => (
+                          <img
+                            key={idx}
+                            src={img}
+                            alt={`${project.title} screenshot ${idx + 1}`}
+                            className="h-56 w-auto rounded-lg shadow-md object-cover"
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Content */}
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 mb-4">{project.description}</p>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tags
+                        .filter((tag) => tag !== 'Featured')
+                        .map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-medium"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                    </div>
+                    <Button
+                      href={project.link}
+                      target="_blank"
+                      variant="primary"
+                      size="sm"
+                    >
+                      {t.projects.viewGitHub}
+                    </Button>
+                  </div>
+                </motion.div>
+              ))}
+          </div>
+        </motion.div>
+      </SectionWrapper>
+
+      {/* All Projects Grid */}
       <SectionWrapper className="bg-white">
         {/* Filters */}
         <motion.div
@@ -76,7 +217,7 @@ export default function Projects() {
           className="mb-12"
         >
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
-            Filter by Category
+            {t.projects.filterCategory}
           </h3>
           <div className="flex flex-wrap gap-3">
             <button
@@ -87,33 +228,40 @@ export default function Projects() {
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              All
+              {t.projects.allProjects}
             </button>
-            {allTags.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => setSelectedFilter(tag)}
-                className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                  selectedFilter === tag
-                    ? 'bg-red-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {tag}
-              </button>
-            ))}
+            {allTags
+              .filter((tag) => tag !== 'Featured')
+              .map((tag) => (
+                <button
+                  key={tag}
+                  onClick={() => setSelectedFilter(tag)}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                    selectedFilter === tag
+                      ? 'bg-red-600 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  {tag}
+                </button>
+              ))}
           </div>
         </motion.div>
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project, index) => (
-            <ProjectCard
-              key={project.title}
-              index={index}
-              {...project}
-            />
-          ))}
+          {filteredProjects
+            .filter((p) => !p.tags.includes('Featured'))
+            .map((project, index) => (
+              <ProjectCard
+                key={project.title}
+                index={index}
+                title={project.title}
+                description={project.description}
+                tags={project.tags.filter((tag) => tag !== 'Featured')}
+                link={project.link}
+              />
+            ))}
         </div>
       </SectionWrapper>
 
@@ -127,17 +275,18 @@ export default function Projects() {
           className="bg-gradient-to-r from-red-600 to-red-700 text-white rounded-2xl p-12 text-center"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            All Projects Are Open Source
+            {t.projects.openSource}
           </h2>
           <p className="text-lg text-red-50 mb-8 max-w-2xl mx-auto">
-            We believe in transparency and community collaboration. All our projects are open source and available on GitHub for you to explore, contribute, and learn from.
+            {t.projects.believeTransparency}
           </p>
           <Button
             href="https://github.com/soghayarmahmoud"
+            target="_blank"
             variant="secondary"
             size="lg"
           >
-            View on GitHub
+            {t.projects.viewGitHub}
           </Button>
         </motion.div>
       </SectionWrapper>
@@ -151,13 +300,13 @@ export default function Projects() {
           viewport={{ once: true }}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Want to Contribute?
+            {t.projects.wantContribute}
           </h2>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl">
-            We welcome contributions from developers, designers, and community members. Whether it's fixing bugs, adding features, or improving documentation, there's always something you can help with.
+            {t.projects.welcomeContributions}
           </p>
           <Button href="/contact" variant="primary" size="lg">
-            Get In Touch
+            {t.common.getInTouch}
           </Button>
         </motion.div>
       </SectionWrapper>

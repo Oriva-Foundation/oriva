@@ -8,8 +8,13 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faBriefcase } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/lib/translations';
 
 export default function Contact() {
+  const { language, isArabic, dir } = useLanguage();
+  const t = translations[language];
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -70,8 +75,8 @@ export default function Contact() {
     <div>
       {/* Hero Section */}
       <HeroSection
-        title="Get In Touch"
-        subtitle="Have questions, want to contribute, or interested in partnering with us? We'd love to hear from you."
+        title={t.contact.hero.title}
+        subtitle={t.contact.hero.subtitle}
       />
 
       {/* Contact Methods */}
@@ -84,10 +89,10 @@ export default function Contact() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Connect With Us
+            {t.contact.connectWith}
           </h2>
           <p className="text-xl text-gray-600">
-            Choose your preferred way to reach out
+            {t.contact.choosePreferred}
           </p>
         </motion.div>
 
@@ -128,25 +133,25 @@ export default function Contact() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Send us a Message
+              {t.contact.sendMessage}
             </h2>
             <p className="text-lg text-gray-600 mb-6">
-              We're usually pretty quick to respond. Give us some details about what you'd like to discuss, and we'll get back to you as soon as possible.
+              {t.contact.usuallyQuick}
             </p>
 
             <div className="space-y-6">
               {[
                 {
-                  title: 'Questions?',
-                  description: 'Got a question about Oriva? We have answers.',
+                  title: t.contact.gotQuestion,
+                  description: t.contact.questionAnswer,
                 },
                 {
-                  title: 'Want to Contribute?',
-                  description: 'Let us know how you\'d like to contribute to our mission.',
+                  title: t.contact.wantJoin,
+                  description: t.contact.letKnow,
                 },
                 {
-                  title: 'Partnership?',
-                  description: 'Interested in partnering with Oriva Foundation?',
+                  title: t.contact.interestedPartner,
+                  description: t.contact.interestedPartnering,
                 },
               ].map((item) => (
                 <div key={item.title} className="flex gap-3">
@@ -179,13 +184,13 @@ export default function Contact() {
               >
                 <div className="text-6xl mb-4">✓</div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                  Message Received!
+                  {t.contact.messageReceived}
                 </h3>
                 <p className="text-gray-600 mb-4">
-                  Thank you for reaching out. We'll get back to you soon!
+                  {t.contact.thankYouReaching}
                 </p>
                 <div className="text-red-600 text-lg">
-                  We appreciate your interest.
+                  {t.contact.weAppreciate}
                 </div>
               </motion.div>
             ) : (
@@ -195,7 +200,7 @@ export default function Contact() {
                     htmlFor="name"
                     className="block text-sm font-semibold text-gray-900 mb-2"
                   >
-                    Full Name
+                    {t.contact.fullName}
                   </label>
                   <input
                     type="text"
@@ -204,8 +209,9 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white text-gray-900 focus:outline-none focus:border-red-600 transition-colors"
-                    placeholder="Your name"
+                    className={`w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white text-gray-900 focus:outline-none focus:border-red-600 transition-colors ${isArabic ? 'text-right' : ''}`}
+                    placeholder={isArabic ? 'اسمك' : 'Your name'}
+                    dir={dir}
                   />
                 </div>
 
@@ -214,7 +220,7 @@ export default function Contact() {
                     htmlFor="email"
                     className="block text-sm font-semibold text-gray-900 mb-2"
                   >
-                    Email Address
+                    {t.contact.email}
                   </label>
                   <input
                     type="email"
@@ -223,8 +229,9 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white text-gray-900 focus:outline-none focus:border-red-600 transition-colors"
+                    className={`w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white text-gray-900 focus:outline-none focus:border-red-600 transition-colors ${isArabic ? 'text-right' : ''}`}
                     placeholder="your@email.com"
+                    dir={dir}
                   />
                 </div>
 
@@ -233,7 +240,7 @@ export default function Contact() {
                     htmlFor="message"
                     className="block text-sm font-semibold text-gray-900 mb-2"
                   >
-                    Message
+                    {t.contact.message}
                   </label>
                   <textarea
                     id="message"
@@ -242,13 +249,14 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white text-gray-900 focus:outline-none focus:border-red-600 transition-colors resize-none"
-                    placeholder="Tell us more about what you'd like to discuss..."
+                    className={`w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white text-gray-900 focus:outline-none focus:border-red-600 transition-colors resize-none ${isArabic ? 'text-right' : ''}`}
+                    placeholder={isArabic ? 'أخبرنا المزيد...' : 'Tell us more about what you\'d like to discuss...'}
+                    dir={dir}
                   />
                 </div>
 
                 <Button type="submit" variant="primary" size="lg" className="w-full">
-                  Send Message
+                  {t.contact.sendMessage}
                 </Button>
               </form>
             )}
@@ -266,10 +274,10 @@ export default function Contact() {
           className="text-center"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Global Community
+            {t.contact.global}
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            We're a distributed team working with communities around the world. No matter where you are, we're here to connect and collaborate.
+            {t.contact.distributedTeam}
           </p>
         </motion.div>
       </SectionWrapper>

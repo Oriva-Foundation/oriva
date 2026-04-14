@@ -19,6 +19,7 @@ export default function Navbar() {
     { label: 'nav.team', href: '/team' },
     { label: 'nav.impact', href: '/impact' },
     { label: 'nav.joinUs', href: '/join' },
+    { label: 'nav.volunteer', href: '/volunteer' },
     { label: 'nav.support', href: '/support' },
     { label: 'nav.contact', href: '/contact' },
   ];
