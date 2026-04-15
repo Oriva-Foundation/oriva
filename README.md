@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="public/imgs/oriva.png" width="400px" height="400px" style="border-radius: 50%; object-fit: cover;">
+</div>
+
 # Oriva Foundation
 
 A modern, professional portfolio website for Oriva Foundation - a non-profit organization focused on building Islamic applications and community-driven projects that deliver impactful digital solutions for society.
