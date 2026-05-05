@@ -5,35 +5,161 @@ import SectionWrapper from '@/components/SectionWrapper';
 import ProjectCard from '@/components/ProjectCard';
 import Button from '@/components/Button';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/lib/translations';
 
-const projectsData = {
-  en: [
-    {
-      title: 'Prayer Times App',
-      description: 'A comprehensive Islamic application providing accurate prayer times across locations, Quranic features, and community engagement tools.',
-      tags: ['Islamic', 'Mobile', 'React Native'],
-      link: 'https://github.com',
-    },
-    {
-      title: 'Community Forum',
-      description: 'A safe and inclusive platform for community discussions, knowledge sharing, and collaborative problem-solving.',
-      tags: ['Community', 'Web', 'Next.js'],
-      link: 'https://github.com',
-    },
-    {
-      title: 'ProCode Academy - E-Learning LMS Platform',
-      description: 'A comprehensive e-learning platform designed to make quality education accessible to everyone. Features interactive courses, live classes, and a supportive learning community.',
-      tags: ['Education', 'Platform', 'Featured'],
-      link: 'https://github.com/soghayarmahmoud/procode-edu-pulse-lms',
-      images: [
-        '/imgs/procode/1.PNG',
-        '/imgs/procode/2.PNG',
-        '/imgs/procode/3.PNG',
-      ],
-    },
+interface Project {
+  _id: string;
+  title: string;
+  titleAr: string;
+  description: string;
+  descriptionAr: string;
+  status: string;
+  category: string;
+  technologies: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  images: string[];
+  featured: boolean;
+  tags: string[];
+}
+
+export default function Projects() {
+  const { language } = useLanguage();
+  const t = translations[language];
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  const fetchProjects = async () => {
+    try {
+      const response = await fetch('/api/projects');
+      const data = await response.json();
+      if (data.success) {
+        setProjects(data.data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch projects:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const allTags = Array.from(
+    new Set(projects.flatMap((p) => p.tags))
+  );
+
+  const filteredProjects = selectedFilter
+    ? projects.filter((p) => p.tags.includes(selectedFilter))
+    : projects;
+
+  return (
+    <div>
+      {/* Hero Section */}
+      <HeroSection
+        title={t.projects.hero.title}
+        subtitle={t.projects.hero.subtitle}
+      />
+
+      {/* Featured Projects Section */}
+      <SectionWrapper className="bg-gray-50">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            {t.projects.filterCategory}
+          </h2>
+          <p className="text-xl text-gray-600">
+            {t.projects.openSource}
+          </p>
+        </motion.div>
+
+        {/* Filter Buttons */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <button
+            onClick={() => setSelectedFilter(null)}
+            className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+              selectedFilter === null
+                ? 'bg-red-600 text-white'
+                : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
+            }`}
+          >
+            {t.projects.allProjects}
+          </button>
+          {allTags.map((tag) => (
+            <button
+              key={tag}
+              onClick={() => setSelectedFilter(tag)}
+              className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+                selectedFilter === tag
+                  ? 'bg-red-600 text-white'
+                  : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
+              }`}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+
+        {loading ? (
+          <div className="flex items-center justify-center h-64">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProjects.map((project, index) => (
+              <ProjectCard
+                key={project._id}
+                index={index}
+                title={language === 'ar' ? project.titleAr : project.title}
+                description={language === 'ar' ? project.descriptionAr : project.description}
+                tags={project.technologies}
+                link={project.githubUrl || project.liveUrl || '#'}
+                images={project.images}
+              />
+            ))}
+          </div>
+        )}
+
+        {!loading && filteredProjects.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-gray-500">No projects found</p>
+          </div>
+        )}
+      </SectionWrapper>
+
+      {/* Open Source Section */}
+      <SectionWrapper className="bg-white">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            {t.projects.wantContribute}
+          </h2>
+          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            {t.projects.welcomeContributions}
+          </p>
+          <Button href="https://github.com" variant="primary" size="lg">
+            {t.projects.viewGitHub}
+          </Button>
+        </motion.div>
+      </SectionWrapper>
+    </div>
+  );
+}
     {
       title: 'Al-Buckary App',
       description: 'A modern Islamic application connecting believers with authentic Islamic content, including authentic hadith collections and community resources.',

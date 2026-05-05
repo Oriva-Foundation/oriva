@@ -45,24 +45,32 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
     setSubmitError('');
 
     try {
-      // Simulate form submission - in production, send to backend
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      setSubmitMessage(t.forms.successMessage);
-      setFormData({
-        fullName: '',
-        email: '',
-        phone: '',
-        position: '',
-        experience: '',
-        skills: '',
-        message: '',
-        availability: '',
-        portfolio: '',
+      const response = await fetch('/api/applications', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
 
-      // Clear message after 5 seconds
-      setTimeout(() => setSubmitMessage(''), 5000);
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitMessage(t.forms.successMessage);
+        setFormData({
+          fullName: '',
+          email: '',
+          phone: '',
+          position: '',
+          experience: '',
+          skills: '',
+          message: '',
+          availability: '',
+          portfolio: '',
+        });
+      } else {
+        setSubmitError(data.message || t.forms.errorMessage);
+      }
     } catch (error) {
       setSubmitError(t.forms.errorMessage);
     } finally {

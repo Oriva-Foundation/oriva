@@ -1,53 +1,189 @@
-<div align="center">
-  <img src="public/imgs/oriva.png" width="400px" height="400px" style="border-radius: 50%; object-fit: cover;">
-</div>
+# Oriva Foundation Platform
 
-# Oriva Foundation
+A modern, production-ready platform for Oriva Foundation - a non-profit tech community focused on teaching technology, hosting events, and building impactful digital solutions.
 
-A modern, professional portfolio website for Oriva Foundation - a non-profit organization focused on building Islamic applications and community-driven projects that deliver impactful digital solutions for society.
+## 🚀 Features
 
-## Live Demo
+- **Full-Stack Architecture**: Next.js frontend with API routes backend
+- **Multi-Language Support**: English and Arabic with RTL support
+- **Database**: MongoDB with Mongoose ODM
+- **Authentication**: Firebase Auth ready
+- **Admin Dashboard**: Complete CMS for managing content
+- **Modern UI**: Tailwind CSS with Framer Motion animations
+- **Responsive Design**: Mobile-first approach
+- **SEO Optimized**: Built with Next.js for performance
 
-[Visit Oriva Foundation](https://oriva-nine.vercel.app/)
+## 🛠️ Tech Stack
 
-## 📋 Overview
+### Frontend
+- **Next.js 16** - React framework
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **Framer Motion** - Animations
+- **Lucide React** - Icons
 
-Oriva Foundation is dedicated to:
-- Building Islamic applications
-- Creating community-driven projects
-- Delivering impactful digital solutions for society
+### Backend
+- **Next.js API Routes** - Serverless functions
+- **MongoDB** - Database
+- **Mongoose** - ODM
+- **Zod** - Validation
+- **bcryptjs** - Password hashing
+- **jsonwebtoken** - JWT tokens
 
-This website showcases our mission, projects, impact, team, and provides ways for community members to get involved and support our work.
+### DevOps
+- **ESLint** - Code linting
+- **Prettier** - Code formatting (recommended)
 
-## Quick Start
+## 📋 Prerequisites
 
-### Prerequisites
-- Node.js 18.0 or higher
+- Node.js 18+
+- MongoDB (local or cloud)
 - npm or yarn
 
-### Installation
+## 🚀 Getting Started
 
-```bash
-# Clone the repository
-git clone https://github.com/Oriva-Foundation/oriva.git
-cd oriva
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd oriva
+   ```
 
-# Install dependencies
-npm install
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-# Start development server
-npm run dev
+3. **Set up environment variables**
+   ```bash
+   cp .env.local.example .env.local
+   ```
+
+   Edit `.env.local` with your configuration:
+   ```env
+   MONGODB_URI=mongodb://localhost:27017/oriva
+   NEXTAUTH_SECRET=your-secret-key
+   NEXTAUTH_URL=http://localhost:3000
+   ```
+
+4. **Start MongoDB**
+   ```bash
+   # Using local MongoDB
+   mongod
+
+   # Or using Docker
+   docker run -d -p 27017:27017 --name mongodb mongo:latest
+   ```
+
+5. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+6. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 📁 Project Structure
+
+```
+oriva/
+├── app/                    # Next.js app directory
+│   ├── admin/             # Admin dashboard pages
+│   ├── api/               # API routes
+│   ├── events/            # Events pages
+│   ├── courses/           # Courses pages
+│   ├── projects/          # Projects pages
+│   ├── volunteer/         # Volunteer pages
+│   └── ...                # Other pages
+├── components/            # Reusable components
+├── lib/                   # Utilities and configurations
+│   ├── database/         # Database connection
+│   ├── models/           # Mongoose models
+│   └── translations.ts   # i18n translations
+├── context/               # React contexts
+├── public/               # Static assets
+└── ...
 ```
 
-The website will be available at [http://localhost:3000](http://localhost:3000)
+## 🗄️ Database Models
 
-## 📦 Build for Production
+- **Application**: Volunteer and job applications
+- **Event**: Events, workshops, hackathons
+- **EventRegistration**: Event registrations
+- **Course**: Educational courses
+- **Project**: Community projects
 
-```bash
-# Create optimized production build
-npm run build
+## 🔧 Available Scripts
 
-# Start production server
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+
+## 🌍 Multi-Language Support
+
+The platform supports English and Arabic with full RTL support. Language switching is available in the navigation bar.
+
+## 👨‍💼 Admin Dashboard
+
+Access the admin dashboard at `/admin` to manage:
+- Applications (volunteer/job)
+- Events
+- Courses
+- Projects
+
+## 📱 API Endpoints
+
+### Applications
+- `GET /api/applications` - List applications
+- `POST /api/applications` - Submit application
+
+### Events
+- `GET /api/events` - List events
+- `POST /api/events` - Create event
+- `POST /api/events/[id]/register` - Register for event
+
+### Courses
+- `GET /api/courses` - List courses
+
+### Projects
+- `GET /api/projects` - List projects
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+1. Connect your GitHub repository to Vercel
+2. Add environment variables in Vercel dashboard
+3. Deploy
+
+### Other Platforms
+The app can be deployed to any platform supporting Next.js:
+- Netlify
+- Railway
+- DigitalOcean App Platform
+- Self-hosted with Docker
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- Oriva Foundation team
+- Open source community
+- Next.js and React teams
+
+## 📞 Support
+
+For support, email contact@oriva.org or join our Discord community.
 npm start
 ```
 
