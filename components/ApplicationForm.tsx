@@ -1,9 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/lib/translations';
 import Button from './Button';
+import LoadingSpinner from './LoadingSpinner';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 interface ApplicationFormProps {
   type: 'job' | 'volunteer';
@@ -29,6 +33,7 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
   const [submitError, setSubmitError] = useState('');
+  const [touched, setTouched] = useState<Set<string>>(new Set());
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -38,8 +43,28 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
     }));
   };
 
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name } = e.target;
+    setTouched(prev => new Set([...prev, name]));
+  };
+
+  // Basic validation
+  const validateForm = () => {
+    const requiredFields = ['fullName', 'email', 'phone', 'message'];
+    if (type === 'job') requiredFields.push('position');
+    if (type === 'volunteer') requiredFields.push('availability');
+
+    return requiredFields.every(field => formData[field as keyof typeof formData].trim() !== '');
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      setSubmitError(t.forms.errorMessage || 'Please fill in all required fields');
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitMessage('');
     setSubmitError('');
@@ -68,11 +93,14 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
           availability: '',
           portfolio: '',
         });
+        setTouched(new Set());
+        // Clear success message after 5 seconds
+        setTimeout(() => setSubmitMessage(''), 5000);
       } else {
         setSubmitError(data.message || t.forms.errorMessage);
       }
     } catch (error) {
-      setSubmitError(t.forms.errorMessage);
+      setSubmitError(t.forms.errorMessage || 'An error occurred. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -84,11 +112,13 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
 
   return (
     <div className="w-full max-w-2xl mx-auto p-8 bg-white rounded-lg shadow-lg">
-      <form onSubmit={handleSubmit} className="space-y-6">
+      {isSubmitting && <LoadingSpinner fullScreen message="Submitting..." />}
+      
+      <form onSubmit={handleSubmit} className="space-y-6" noValidate>
         {/* Full Name */}
         <div>
           <label htmlFor="fullName" className="block text-sm font-medium text-gray-900 mb-2">
-            {t.forms.fullName} *
+            {t.forms.fullName} <span className="text-red-600">*</span>
           </label>
           <input
             type="text"
@@ -96,17 +126,21 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
             name="fullName"
             value={formData.fullName}
             onChange={handleChange}
+            onBlur={handleBlur}
             required
-            className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${isArabic ? 'text-right' : ''}`}
+            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors ${
+              formData.fullName ? 'border-green-300' : 'border-gray-300'
+            } ${isArabic ? 'text-right' : ''}`}
             placeholder={isArabic ? 'أدخل اسمك الكامل' : 'Enter your full name'}
             dir={dir}
+            aria-required="true"
           />
         </div>
 
         {/* Email */}
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-2">
-            {t.forms.email} *
+            {t.forms.email} <span className="text-red-600">*</span>
           </label>
           <input
             type="email"
@@ -114,17 +148,21 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
             name="email"
             value={formData.email}
             onChange={handleChange}
+            onBlur={handleBlur}
             required
-            className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${isArabic ? 'text-right' : ''}`}
+            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors ${
+              formData.email && formData.email.includes('@') ? 'border-green-300' : 'border-gray-300'
+            } ${isArabic ? 'text-right' : ''}`}
             placeholder="your.email@example.com"
             dir={dir}
+            aria-required="true"
           />
         </div>
 
         {/* Phone */}
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-gray-900 mb-2">
-            {t.forms.phone} *
+            {t.forms.phone} <span className="text-red-600">*</span>
           </label>
           <input
             type="tel"
@@ -132,10 +170,14 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
             name="phone"
             value={formData.phone}
             onChange={handleChange}
+            onBlur={handleBlur}
             required
-            className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${isArabic ? 'text-right' : ''}`}
+            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors ${
+              formData.phone ? 'border-green-300' : 'border-gray-300'
+            } ${isArabic ? 'text-right' : ''}`}
             placeholder="+1 (555) 000-0000"
             dir={dir}
+            aria-required="true"
           />
         </div>
 
@@ -143,16 +185,20 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
         {isJob && (
           <div>
             <label htmlFor="position" className="block text-sm font-medium text-gray-900 mb-2">
-              {t.forms.position} *
+              {t.forms.position} <span className="text-red-600">*</span>
             </label>
             <select
               id="position"
               name="position"
               value={formData.position}
               onChange={handleChange}
+              onBlur={handleBlur}
               required
-              className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${isArabic ? 'text-right' : ''}`}
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors ${
+                formData.position ? 'border-green-300' : 'border-gray-300'
+              } ${isArabic ? 'text-right' : ''}`}
               dir={dir}
+              aria-required="true"
             >
               <option value="">{t.forms.selectPosition}</option>
               {positions.map(pos => (
@@ -174,7 +220,8 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
             name="experience"
             value={formData.experience}
             onChange={handleChange}
-            className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${isArabic ? 'text-right' : ''}`}
+            onBlur={handleBlur}
+            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors ${isArabic ? 'text-right' : ''} border-gray-300`}
             dir={dir}
           >
             <option value="">Select experience level</option>
@@ -195,8 +242,9 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
             name="skills"
             value={formData.skills}
             onChange={handleChange}
+            onBlur={handleBlur}
             rows={3}
-            className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${isArabic ? 'text-right' : ''}`}
+            className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors ${isArabic ? 'text-right' : ''}`}
             placeholder={isArabic ? 'اذكر مهاراتك' : 'List your skills'}
             dir={dir}
           />
@@ -214,7 +262,8 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
               name="portfolio"
               value={formData.portfolio}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${isArabic ? 'text-right' : ''}`}
+              onBlur={handleBlur}
+              className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors ${isArabic ? 'text-right' : ''}`}
               placeholder="https://yourportfolio.com"
               dir={dir}
             />
@@ -225,16 +274,20 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
         {!isJob && (
           <div>
             <label htmlFor="availability" className="block text-sm font-medium text-gray-900 mb-2">
-              {t.forms.availability} *
+              {t.forms.availability} <span className="text-red-600">*</span>
             </label>
             <select
               id="availability"
               name="availability"
               value={formData.availability}
               onChange={handleChange}
+              onBlur={handleBlur}
               required
-              className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${isArabic ? 'text-right' : ''}`}
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors ${
+                formData.availability ? 'border-green-300' : 'border-gray-300'
+              } ${isArabic ? 'text-right' : ''}`}
               dir={dir}
+              aria-required="true"
             >
               <option value="">{t.forms.selectAvailability}</option>
               <option value="full-time">{t.forms.fullTime}</option>
@@ -247,40 +300,59 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
         {/* Message */}
         <div>
           <label htmlFor="message" className="block text-sm font-medium text-gray-900 mb-2">
-            {messageLabel} *
+            {messageLabel} <span className="text-red-600">*</span>
           </label>
           <textarea
             id="message"
             name="message"
             value={formData.message}
             onChange={handleChange}
+            onBlur={handleBlur}
             required
             rows={5}
-            className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${isArabic ? 'text-right' : ''}`}
+            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors ${
+              formData.message ? 'border-green-300' : 'border-gray-300'
+            } ${isArabic ? 'text-right' : ''}`}
             placeholder={isArabic ? 'اكتب رسالتك' : 'Write your message'}
             dir={dir}
+            aria-required="true"
           />
         </div>
 
         {/* Success Message */}
         {submitMessage && (
-          <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="p-4 bg-green-50 border border-green-300 rounded-lg flex items-center gap-3"
+            role="alert"
+            aria-live="polite"
+          >
+            <FontAwesomeIcon icon={faCheckCircle} className="text-green-600 text-lg flex-shrink-0" />
             <p className="text-green-800">{submitMessage}</p>
-          </div>
+          </motion.div>
         )}
 
         {/* Error Message */}
         {submitError && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="p-4 bg-red-50 border border-red-300 rounded-lg flex items-center gap-3"
+            role="alert"
+            aria-live="polite"
+          >
+            <FontAwesomeIcon icon={faExclamationCircle} className="text-red-600 text-lg flex-shrink-0" />
             <p className="text-red-800">{submitError}</p>
-          </div>
+          </motion.div>
         )}
 
         {/* Submit Button */}
         <Button
-          onClick={() => {}}
-          disabled={isSubmitting}
+          type="submit"
+          disabled={isSubmitting || !validateForm()}
           className="w-full"
+          size="lg"
         >
           {isSubmitting ? 'Submitting...' : submitLabel}
         </Button>
@@ -288,3 +360,4 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
     </div>
   );
 }
+
