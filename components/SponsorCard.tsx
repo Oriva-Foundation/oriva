@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import Button from './Button';
 
 export default function SponsorCard() {
@@ -14,7 +16,7 @@ export default function SponsorCard() {
       className="bg-gradient-to-br from-red-600 to-red-700 text-white rounded-2xl p-8 md:p-12 text-center shadow-lg"
     >
       <div className="mb-6">
-        <span className="text-4xl md:text-5xl">❤️</span>
+        <FontAwesomeIcon icon={faHeart} className="text-4xl md:text-5xl text-white" />
       </div>
       <h3 className="text-2xl md:text-3xl font-bold mb-4">
         Support Our Mission
@@ -28,7 +30,7 @@ export default function SponsorCard() {
           variant="secondary"
           size="lg"
         >
-          💫 Become a Sponsor
+          Become a Sponsor
         </Button>
         <Button href="/contact" variant="outline" size="lg">
           Get Involved

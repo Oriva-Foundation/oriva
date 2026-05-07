@@ -53,29 +53,8 @@ export default function Navbar() {
             <span className="text-xl font-bold text-red-600">Oriva</span>
           </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-gray-700 hover:text-red-600 transition-colors font-medium text-sm"
-              >
-                {getTranslation(language as Language, item.label)}
-              </Link>
-            ))}
-            
-            {/* Language Toggle */}
-            <button
-              onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
-              className="ml-4 px-3 py-1.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors font-medium text-sm border border-red-200"
-            >
-              {language === 'en' ? 'العربية' : 'English'}
-            </button>
-          </div>
-
           {/* Mobile Menu Button & Language Toggle */}
-          <div className="lg:hidden flex items-center gap-2">
+          <div className="flex items-center gap-2">
             {/* Mobile Language Toggle */}
             <button
               onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
@@ -101,7 +80,7 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <motion.div
-            className="lg:hidden pb-4 border-t border-gray-100"
+            className="pb-4 border-t border-gray-100"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}

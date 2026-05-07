@@ -333,7 +333,7 @@ export default function Support() {
             Every contribution, big or small, makes a difference in our mission to build impactful digital solutions for communities.
           </p>
           <Button href="https://github.com/sponsors/soghayarmahmoud" variant="primary" size="lg">
-            💫 Become a Sponsor
+            Become a Sponsor
           </Button>
         </motion.div>
       </SectionWrapper>
