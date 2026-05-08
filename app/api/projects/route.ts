@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10');
 
     // Build query
-    const query: any = {};
+    const query: Record<string, unknown> = {};
     if (featured === 'true') query.featured = true;
     if (category) query.category = category;
     if (status) query.status = status;

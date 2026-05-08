@@ -41,7 +41,7 @@ export default function CourseEnrollmentForm({ courseId, courseTitle }: CourseEn
       setEmail('');
       setPhone('');
       setMessage('');
-    } catch (error) {
+    } catch {
       setStatus('error');
       setErrorMessage('An unexpected error occurred. Please try again.');
     }

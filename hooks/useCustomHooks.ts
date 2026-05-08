@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 /**
  * Hook for detecting when an element enters the viewport
@@ -39,12 +39,9 @@ export const useIntersectionObserver = (options?: IntersectionObserverInit) => {
  * Useful for showing offline error pages
  */
 export const useOnline = () => {
-  const [isOnline, setIsOnline] = useState(true);
+  const [isOnline, setIsOnline] = useState(() => (typeof navigator !== 'undefined' ? navigator.onLine : true));
 
   useEffect(() => {
-    // Set initial state
-    setIsOnline(navigator.onLine);
-
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
 
@@ -72,7 +69,7 @@ export const useAsync = <T, E = string>(
   const [value, setValue] = useState<T | null>(null);
   const [error, setError] = useState<E | null>(null);
 
-  const execute = async () => {
+  const execute = useCallback(async () => {
     setStatus('pending');
     setValue(null);
     setError(null);
@@ -86,13 +83,13 @@ export const useAsync = <T, E = string>(
       setError(error as E);
       setStatus('error');
     }
-  };
+  }, [asyncFunction]);
 
   useEffect(() => {
     if (immediate) {
-      execute();
+      void execute();
     }
-  }, []);
+  }, [execute, immediate]);
 
   return { execute, status, value, error, isLoading: status === 'pending' };
 };

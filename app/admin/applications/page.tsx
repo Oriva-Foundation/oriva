@@ -24,7 +24,10 @@ interface Application {
 export default function ApplicationsPage() {
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<'all' | 'pending' | 'reviewed' | 'accepted' | 'rejected'>('all');
+  const filterOptions = ['all', 'pending', 'reviewed', 'accepted', 'rejected'] as const;
+  type FilterStatus = (typeof filterOptions)[number];
+
+  const [filter, setFilter] = useState<FilterStatus>('all');
 
   useEffect(() => {
     fetchApplications();
@@ -44,13 +47,13 @@ export default function ApplicationsPage() {
     }
   };
 
-  const updateApplicationStatus = async (id: string, status: string) => {
+  const updateApplicationStatus = async (id: string, status: Application['status']) => {
     // In a real app, you'd have an API endpoint for this
     console.log('Updating application', id, 'to status', status);
     // For now, just update locally
     setApplications(prev =>
       prev.map(app =>
-        app._id === id ? { ...app, status: status as any } : app
+        app._id === id ? { ...app, status } : app
       )
     );
   };

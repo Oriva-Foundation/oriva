@@ -33,7 +33,6 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
   const [submitError, setSubmitError] = useState('');
-  const [touched, setTouched] = useState<Set<string>>(new Set());
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -43,9 +42,8 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
     }));
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name } = e.target;
-    setTouched(prev => new Set([...prev, name]));
+  const handleBlur = () => {
+    // Blur handling can be expanded for field-level validation later.
   };
 
   // Basic validation
@@ -93,7 +91,6 @@ export default function ApplicationForm({ type, positions = [] }: ApplicationFor
           availability: '',
           portfolio: '',
         });
-        setTouched(new Set());
         // Clear success message after 5 seconds
         setTimeout(() => setSubmitMessage(''), 5000);
       } else {

@@ -6,9 +6,8 @@ import SectionWrapper from '@/components/SectionWrapper';
 import Button from '@/components/Button';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faClock, faUsers, faDollarSign } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faClock, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { useLanguage } from '@/context/LanguageContext';
-import { getTranslation } from '@/lib/translations';
 
 interface Course {
   _id: string;
@@ -32,7 +31,9 @@ export default function CoursesPage() {
   const { language } = useLanguage();
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<'all' | 'beginner' | 'intermediate' | 'advanced'>('all');
+  const filterOptions = ['all', 'beginner', 'intermediate', 'advanced'] as const;
+  type CourseFilter = (typeof filterOptions)[number];
+  const [filter, setFilter] = useState<CourseFilter>('all');
 
   useEffect(() => {
     fetchCourses();
@@ -75,10 +76,10 @@ export default function CoursesPage() {
       <SectionWrapper>
         <div className="mb-8">
           <div className="flex flex-wrap gap-4 mb-6">
-            {['all', 'beginner', 'intermediate', 'advanced'].map((level) => (
+            {filterOptions.map((level) => (
               <button
                 key={level}
-                onClick={() => setFilter(level as any)}
+                onClick={() => setFilter(level)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium capitalize transition-colors ${
                   filter === level
                     ? 'bg-red-100 text-red-700'

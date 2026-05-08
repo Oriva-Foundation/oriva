@@ -825,10 +825,14 @@ export type Language = 'en' | 'ar';
 
 export function getTranslation(lang: Language, key: string): string {
   const parts = key.split('.');
-  let current: any = translations[lang];
+  let current: unknown = translations[lang];
   
   for (const part of parts) {
-    current = current?.[part];
+    if (typeof current === 'object' && current !== null) {
+      current = (current as Record<string, unknown>)[part];
+    } else {
+      current = undefined;
+    }
   }
   
   return typeof current === 'string' ? current : key;

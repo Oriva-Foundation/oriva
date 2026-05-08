@@ -47,7 +47,7 @@ export default function Terms() {
                 2. Use License
               </h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                Permission is granted to temporarily download one copy of the materials (information or software) on Oriva Foundation's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
+                Permission is granted to temporarily download one copy of the materials (information or software) on Oriva Foundation&apos;s website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
               </p>
               <ul className="list-disc list-inside text-gray-600 space-y-2">
                 <li>Modify or copy the materials</li>

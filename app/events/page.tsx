@@ -6,7 +6,7 @@ import SectionWrapper from '@/components/SectionWrapper';
 import Button from '@/components/Button';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faMapMarkerAlt, faUsers, faClock } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faMapMarkerAlt, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { useLanguage } from '@/context/LanguageContext';
 import { getTranslation } from '@/lib/translations';
 
@@ -30,7 +30,9 @@ export default function EventsPage() {
   const { language } = useLanguage();
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<'all' | 'upcoming' | 'past'>('all');
+  const filterOptions = ['all', 'upcoming', 'past'] as const;
+  type EventFilter = (typeof filterOptions)[number];
+  const [filter, setFilter] = useState<EventFilter>('all');
 
   useEffect(() => {
     fetchEvents();
@@ -88,10 +90,10 @@ export default function EventsPage() {
       <SectionWrapper>
         <div className="mb-8">
           <div className="flex flex-wrap gap-4 mb-6">
-            {['all', 'upcoming', 'past'].map((filterType) => (
+            {filterOptions.map((filterType) => (
               <button
                 key={filterType}
-                onClick={() => setFilter(filterType as any)}
+                onClick={() => setFilter(filterType)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium capitalize transition-colors ${
                   filter === filterType
                     ? 'bg-red-100 text-red-700'

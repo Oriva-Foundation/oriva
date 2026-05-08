@@ -54,7 +54,7 @@ export default function NotFound() {
           transition={{ delay: 0.3 }}
           className="text-lg text-gray-600 mb-8 leading-relaxed"
         >
-          Sorry! The page you're looking for doesn't exist. It might have been moved or deleted. Let's get you back on track.
+          Sorry! The page you&apos;re looking for doesn&apos;t exist. It might have been moved or deleted. Let&apos;s get you back on track.
         </motion.p>
 
         {/* Suggestions */}

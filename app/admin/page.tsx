@@ -13,25 +13,12 @@ interface Stats {
 }
 
 export default function AdminDashboard() {
-  const [stats, setStats] = useState<Stats>({
-    applications: 0,
-    events: 0,
-    courses: 0,
-    projects: 0,
+  const [stats] = useState<Stats>({
+    applications: 24,
+    events: 8,
+    courses: 12,
+    projects: 15,
   });
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // In a real app, fetch stats from API
-    // For now, we'll use mock data
-    setStats({
-      applications: 24,
-      events: 8,
-      courses: 12,
-      projects: 15,
-    });
-    setLoading(false);
-  }, []);
 
   const statCards = [
     {

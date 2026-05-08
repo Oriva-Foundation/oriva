@@ -83,7 +83,7 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10');
 
     // Build query
-    const query: any = {};
+    const query: Record<string, unknown> = {};
     if (type) query.type = type;
     if (status) query.status = status;
 

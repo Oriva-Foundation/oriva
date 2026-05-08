@@ -38,7 +38,7 @@ export default function Privacy() {
                 Introduction
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                Oriva Foundation ("we," "our," or "us") operates the Oriva Foundation website. This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data.
+                Oriva Foundation (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) operates the Oriva Foundation website. This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data.
               </p>
             </section>
 

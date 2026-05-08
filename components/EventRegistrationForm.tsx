@@ -42,7 +42,7 @@ export default function EventRegistrationForm({ eventId, eventTitle }: EventRegi
       setPhone('');
       setExperienceLevel('beginner');
       setExpectations('');
-    } catch (error) {
+    } catch {
       setStatus('error');
       setErrorMessage('An unexpected error occurred. Please try again.');
     }
